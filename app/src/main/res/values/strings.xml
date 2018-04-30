@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BigNerdRanch</string>
+    <string name="crime_title_hint">Entre com o titulo para o crime</string>
+    <string name="crime_title_label">Titulo</string>
+    <string name="crime_details_label">Detalhes</string>
+    <string name="crime_solved_label">Solved</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="date_picker_title">Date of Crime</string>
+</resources>
