@@ -19,16 +19,13 @@ public class CrimeLab {
     }
     private  CrimeLab(Context contect){
         mCrimes=new ArrayList<>();
-        for(int i=0;i<100;i++){
-            Crime crime = new Crime();
-            crime.setmTitle("Crime #"+i);
-            crime.setmSolves(i%2==0);
-            mCrimes.add(crime);
-        }
     }
 
     public List<Crime> getmCrimes(){
         return mCrimes;
+    }
+    public void addCrime(Crime crime){
+        mCrimes.add(crime);
     }
 
     public Crime getCrime(UUID id){

@@ -1,7 +1,9 @@
 package com.example.msn_r.bignerdranch;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import java.util.Date;
 import java.util.UUID;
 
 import static android.widget.CompoundButton.*;
@@ -25,6 +28,7 @@ import static android.widget.CompoundButton.*;
 public class CrimeFragment extends Fragment {
     private static final String ARG_CRIME_ID="crime_id";
     private static final String DIALOG_DATE="DialogDate";
+    private static final int REQUEST_DATE=0;
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -57,6 +61,7 @@ public class CrimeFragment extends Fragment {
 
         mSolvedCheckBox=(CheckBox)view.findViewById(R.id.crime_solved);
         mSolvedCheckBox.setChecked(mCrime.ismSolves());
+
         mSolvedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -65,15 +70,17 @@ public class CrimeFragment extends Fragment {
         });
 
         mDateButton=(Button)view.findViewById(R.id.crime_date);
-        mDateButton.setText(mCrime.getmDate().toString());
+        updateDate();
         mDateButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
 //                DatePickerFragment dialog=new DatePickerFragment();
                 DatePickerFragment dialog =DatePickerFragment.newInstance(mCrime.getmDate());
-                dialog.show(manager,DIALOG_DATE);
 
+                dialog.setTargetFragment(CrimeFragment.this,REQUEST_DATE );
+
+                dialog.show(manager,DIALOG_DATE);
             }
         });
 
@@ -99,5 +106,20 @@ public class CrimeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode!= Activity.RESULT_OK){
+            return;
+        }
 
+        if(requestCode==REQUEST_DATE){
+            Date date = (Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            mCrime.setmDate(date);
+            updateDate();
+        }
+    }
+
+    private void updateDate() {
+        mDateButton.setText(mCrime.getmDate().toString());
+    }
 }
