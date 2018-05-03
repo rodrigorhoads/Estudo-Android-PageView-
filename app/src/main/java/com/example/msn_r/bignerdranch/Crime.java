@@ -11,10 +11,14 @@ public class  Crime {
     private boolean mSolves;
 
     public Crime() {
-        this.mId = UUID.randomUUID() ;
+        this(UUID.randomUUID());
         this.mDate = new Date();
     }
 
+    public Crime(UUID id){
+        mId=id;
+        mDate=new Date();
+    }
     public String getmTitle() {
         return mTitle;
     }

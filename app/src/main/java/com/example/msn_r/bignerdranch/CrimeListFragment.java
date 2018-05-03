@@ -65,6 +65,7 @@ private boolean mSubtitleVisible;
             mAdapter = new CrimeAdapter(crimes);
             mRecyclerView.setAdapter(mAdapter);
         }else{
+            mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         }
         updateSubtitle();
@@ -128,8 +129,13 @@ private boolean mSubtitleVisible;
         }
 
         @Override
-        public int getItemCount() {
+        public int getItemCount()
+        {
             return mCrimes.size();
+        }
+
+        public void setCrimes(List<Crime> crimes){
+            mCrimes=crimes;
         }
     }
 
