@@ -3,12 +3,26 @@ package com.example.msn_r.bignerdranch;
 import java.util.Date;
 import java.util.UUID;
 
-public class  Crime {
+public class Crime {
 
     private UUID mId;
     private String mTitle;
     private Date mDate;
     private boolean mSolves;
+    private String mSuspect;
+
+
+    public String getFotoFileName(){
+        return "IMG"+getmId().toString()+".jpg";
+    }
+
+    public String getmSuspect() {
+        return mSuspect;
+    }
+
+    public void setmSuspect(String mSuspect) {
+        this.mSuspect = mSuspect;
+    }
 
     public Crime() {
         this(UUID.randomUUID());
@@ -51,6 +65,8 @@ public class  Crime {
     public Crime(UUID mId, Date mDate) {
         this.mId = mId;
         this.mDate = new Date();
+
+
 
     }
 }

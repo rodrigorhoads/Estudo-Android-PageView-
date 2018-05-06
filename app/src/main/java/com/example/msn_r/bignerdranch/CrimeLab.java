@@ -11,6 +11,7 @@ import com.example.msn_r.bignerdranch.database.CrimeBaseHelper;
 import com.example.msn_r.bignerdranch.database.CrimeCursorWrapper;
 import com.example.msn_r.bignerdranch.database.CrimeDbSchema;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -77,12 +78,19 @@ public class CrimeLab {
 
     }
 
+
+    public File getFoto(Crime crime){
+        File filesDir=mContext.getFilesDir();
+        return new File(filesDir,crime.getFotoFileName());
+    }
+
     private static ContentValues getContentValues(Crime crime){
         ContentValues values = new ContentValues();
         values.put(CrimeTable.Cols.UUID,crime.getmId().toString());
         values.put(CrimeTable.Cols.TITLE,crime.getmTitle());
         values.put(CrimeTable.Cols.DATE,crime.getmDate().getTime());
         values.put(CrimeTable.Cols.SOLVED,crime.ismSolves()?1:0);
+        values.put(CrimeTable.Cols.SUSPECT,crime.getmSuspect());
         return values;
     }
 

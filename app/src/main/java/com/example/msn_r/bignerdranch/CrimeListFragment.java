@@ -1,6 +1,7 @@
 package com.example.msn_r.bignerdranch;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,9 +27,27 @@ import javax.crypto.Cipher;
 
 
 public class CrimeListFragment extends Fragment {
+
+
+
 private RecyclerView mRecyclerView;
 private CrimeAdapter mAdapter;
 private boolean mSubtitleVisible;
+private Callbacks mCallbacks;
+
+/**
+ *Exige uma interface para hospedar activity
+ */
+public interface Callbacks{
+    void onCrimeSelected(Crime crime);
+}
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks=(Callbacks) context;
+    }
+
     private static final String SAVED_SUBTITEL_VISIBLE="subtitle";
 
     @Override
@@ -57,7 +76,7 @@ private boolean mSubtitleVisible;
         outState.putBoolean(SAVED_SUBTITEL_VISIBLE,mSubtitleVisible);
     }
 
-    private void upDateUI(){
+    public void upDateUI(){
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getmCrimes();
 
@@ -103,8 +122,9 @@ private boolean mSubtitleVisible;
         @Override
         public void onClick(View v) {
 //            Intent intent = CrimeActivity.newIntent(getActivity(),mCrime.getmId());
-            Intent intent = CrimePagerActivity.newIntent(getActivity(),mCrime.getmId());
-            startActivity(intent);
+//            Intent intent = CrimePagerActivity.newIntent(getActivity(),mCrime.getmId());
+//            startActivity(intent);
+            mCallbacks.onCrimeSelected(mCrime);
         }
     }
 
@@ -160,8 +180,10 @@ private boolean mSubtitleVisible;
             case R.id.new_crime:{
                 Crime crime=new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
-                Intent inten= CrimePagerActivity.newIntent(getActivity(),crime.getmId());
-                startActivity(inten);
+//                Intent inten= CrimePagerActivity.newIntent(getActivity(),crime.getmId());
+//                startActivity(inten);
+                upDateUI();
+                mCallbacks.onCrimeSelected(crime);
                 return true;
             }
             case R.id.show_subtitle:{
@@ -186,6 +208,12 @@ private boolean mSubtitleVisible;
 
         AppCompatActivity activity=(AppCompatActivity) getActivity();
         activity.getSupportActionBar().setSubtitle(subtitle);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks=null;
     }
 }
 
