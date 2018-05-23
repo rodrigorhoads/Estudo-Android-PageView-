@@ -18,7 +18,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Crime Title"
+        android:hint="Titulo do Crime"
         android:padding="5dp"
         android:textAppearance="@android:color/black"
         android:textSize="18sp"
