@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.msn_r.bignerdranch">
+    package="com.meuteste.testejenkins">
 
     <uses-feature android:name="android.hardware.camera"
         android:required="false"
@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".CrimePagerActivity"
-            android:parentActivityName=".CrimeListActivity">
+            android:name="com.meuteste.testejenkins.CrimePagerActivity"
+            android:parentActivityName="com.meuteste.testejenkins.CrimeListActivity">
         </activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -26,8 +26,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file"
                 />
-            </provider>
-        <activity android:name=".CrimeListActivity">
+        </provider>
+        <activity android:name="com.meuteste.testejenkins.CrimeListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

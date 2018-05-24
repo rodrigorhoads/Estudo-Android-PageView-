@@ -1,9 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        testejenkins {
+            keyAlias 'testejenkins'
+            keyPassword 'evosenha'
+            storeFile file('D:/CoisasDeAndroid/TesteBuildJenkins/build/testejenkins.jks')
+            storePassword 'evosenha'
+        }
+        testejenkinsnovopacote {
+            keyAlias 'testejenkins'
+            keyPassword 'evosenha'
+            storeFile file('D:/CoisasDeAndroid/TesteBuildJenkins/testejenkins.jks')
+            storePassword 'evosenha'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.example.msn_r.bignerdranch"
+        applicationId "com.meuteste.testejenkins"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
@@ -14,6 +28,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.testejenkinsnovopacote
         }
     }
 }

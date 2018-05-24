@@ -5,7 +5,7 @@
     android:id="@+id/dialog_date_picker"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".DatePickerFragment"
+    tools:context="com.meuteste.testejenkins.DatePickerFragment"
     android:calendarViewShown="false"
     >
 </DatePicker>
